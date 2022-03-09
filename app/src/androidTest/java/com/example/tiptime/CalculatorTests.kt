@@ -26,6 +26,20 @@ class CalculatorTests {
         calculate_tip("${serviceCost*0.2}")
     }
 
+    @Test
+    fun calculate_18_percent_tip() {
+        calculate_tip(
+            "${serviceCost*0.18}",
+            R.id.option_eighteen_percent)
+    }
+
+    @Test
+    fun calculate_15_percent_tip() {
+        calculate_tip(
+            "${serviceCost*0.15}",
+            R.id.option_fifteen_percent)
+    }
+
     private fun calculate_tip(tipResult: String, percentId: Int = R.id.option_twenty_percent) {
         onView(withId(percentId))
             .perform(click())
