@@ -19,17 +19,26 @@ class CalculatorTests {
     @get:Rule()
     val activity = ActivityScenarioRule(MainActivity::class.java)
 
+    private var serviceCost = 50
+
     @Test
     fun calculate_20_percent_tip() {
+        calculate_tip("${serviceCost*0.2}")
+    }
+
+    private fun calculate_tip(tipResult: String, percentId: Int = R.id.option_twenty_percent) {
+        onView(withId(percentId))
+            .perform(click())
+
         onView(withId(R.id.cost_of_service_edit_text))
-            .perform(typeText("50.00"))
+            .perform(typeText("$serviceCost"))
             .perform(pressKey(KeyEvent.KEYCODE_ENTER))
 
         onView(withId(R.id.calculate_button))
             .perform(click())
 
         onView(withId(R.id.tip_result))
-            .check(matches(withText(containsString("$10.00"))))
+            .check(matches(withText(containsString("$$tipResult"))))
     }
 
 }
