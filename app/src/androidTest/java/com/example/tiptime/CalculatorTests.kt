@@ -23,6 +23,7 @@ class CalculatorTests {
     fun calculate_20_percent_tip() {
         onView(withId(R.id.cost_of_service_edit_text))
             .perform(typeText("50.00"))
+            .perform(pressKey(KeyEvent.KEYCODE_ENTER))
 
         onView(withId(R.id.calculate_button))
             .perform(click())
