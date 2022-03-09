@@ -35,6 +35,9 @@ class CalculatorTests {
 
     @Test
     fun calculate_15_percent_tip() {
+        //TODO Disable round up temporarily, 15% of $50 is not an Int
+        disable_round_up()
+
         calculate_tip(
             "${serviceCost*0.15}",
             R.id.option_fifteen_percent)
@@ -53,6 +56,11 @@ class CalculatorTests {
 
         onView(withId(R.id.tip_result))
             .check(matches(withText(containsString("$$tipResult"))))
+    }
+
+    private fun disable_round_up() {
+        onView(withId(R.id.round_up_switch))
+            .perform(click())
     }
 
 }
